@@ -4,7 +4,7 @@ import os
 import shutil
 import types
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from glob import glob
 from pathlib import Path
@@ -161,9 +161,9 @@ class LoadConfig:
 class ParquetDBConfig:
     serialize_python_objects:bool = False
     convert_to_fixed_shape: Optional[bool] = None
-    normalize_config: NormalizeConfig = NormalizeConfig()
-    load_config: LoadConfig = LoadConfig()
-    
+    normalize_config: NormalizeConfig = field(default_factory=NormalizeConfig)
+    load_config: LoadConfig = field(default_factory=LoadConfig)
+
 class LoadFormat(Enum):
     BATCHES = "batches"
     TABLE = "table"
